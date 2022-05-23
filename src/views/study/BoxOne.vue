@@ -25,7 +25,9 @@ interface spot{
     isShow:boolean,
     isRed:boolean
 }
+// 选中的棋子索引
 let selectIndex:Ref = ref<number|null>(null);
+// 棋子列表
 let spotList:Ref = ref<spot[]>([]);
 for(let i = 0,len = 16;i < len;i ++){
     let spot:spot = {
@@ -40,6 +42,9 @@ for(let i = 0,len = 16;i < len;i ++){
     }
     spotList.value.push(spot);
 }
+// @params
+// bol:点击的棋子是否显示
+// index:点击的棋子索引
 let clickSpot = (bol:boolean,index:number):void|boolean => {
     if(bol){
         selectIndex.value = index;
