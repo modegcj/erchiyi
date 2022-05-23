@@ -11,7 +11,7 @@
             </template>
             <template v-if="true">
                 <!-- 点 -->
-                <div @click="clickSpot(bol,index)" v-for="bol,index of spotList" :key="index" :class="'spot' + (index+1) + ' ' + (index===selectIndex?'select':'') + ' ' + (bol?'show':'')" class="spot">
+                <div @click="clickSpot(bol.isShow,index)" v-for="bol,index of spotList" :key="index" :class="'spot' + (index+1) + ' ' + (index===selectIndex?'select':'') + ' ' + (bol.isShow?'show':'')" class="spot">
                     <span></span>
                 </div>
             </template>
@@ -27,17 +27,27 @@ interface spot{
 }
 let selectIndex:Ref = ref<number|null>(null);
 let spotList:Ref = ref<spot[]>([]);
-// for(i of 16){
-//      console.log(i)
-// }
+for(let i = 0,len = 16;i < len;i ++){
+    let spot:spot = {
+        isShow: false,
+        isBlue: false,
+    }
+    if(i < 4){
+        spot.isShow = true;
+    }else if(i > 11){
+        spot.isShow = true;
+        spot.isBlue = true;
+    }
+    spotList.value.push(spot);
+}
 let clickSpot = (bol:boolean,index:number):void => {
     if(bol){
         selectIndex.value = index;
     }else if(selectIndex.value!==null){
         if(selectIndex.value===index-4||selectIndex.value===index+4){
-            spotList.value[selectIndex.value] = false;
+            spotList.value[selectIndex.value].isShow = false;
             selectIndex.value = null;
-            spotList.value[index] = true;
+            spotList.value[index].isShow = true;
         }
     }
 }
