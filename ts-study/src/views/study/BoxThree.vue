@@ -1,9 +1,0 @@
-<template>
-    <div class="three">
-        <h1>第三页</h1>
-    </div>
-</template>
-<script lang="ts" setup>
-</script>
-<style>
-</style>
