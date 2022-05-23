@@ -40,11 +40,14 @@ for(let i = 0,len = 16;i < len;i ++){
     }
     spotList.value.push(spot);
 }
-let clickSpot = (bol:boolean,index:number):void => {
+let clickSpot = (bol:boolean,index:number):void|boolean => {
     if(bol){
         selectIndex.value = index;
     }else if(selectIndex.value!==null){
-        if(selectIndex.value===index-4||selectIndex.value===index+4){
+        if((selectIndex.value===index-4||selectIndex.value===index+4||selectIndex.value===index+1||selectIndex.value===index-1)){
+            if((selectIndex.value+1)%4===0&&index===selectIndex.value+1){
+                return false;
+            }
             spotList.value[selectIndex.value].isShow = false;
             selectIndex.value = null;
             spotList.value[index].isShow = true;
