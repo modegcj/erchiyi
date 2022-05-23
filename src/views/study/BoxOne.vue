@@ -12,7 +12,7 @@
             <template v-if="true">
                 <!-- 点 -->
                 <div @click="clickSpot(bol.isShow,index)" v-for="bol,index of spotList" :key="index" :class="'spot' + (index+1) + ' ' + (index===selectIndex?'select':'') + ' ' + (bol.isShow?'show':'')" class="spot">
-                    <span></span>
+                    <span :class="bol.isRed?'red':''"></span>
                 </div>
             </template>
         </div>
@@ -23,20 +23,20 @@ import { ref } from 'vue';
 import type {Ref} from 'vue';
 interface spot{
     isShow:boolean,
-    isBlue:boolean
+    isRed:boolean
 }
 let selectIndex:Ref = ref<number|null>(null);
 let spotList:Ref = ref<spot[]>([]);
 for(let i = 0,len = 16;i < len;i ++){
     let spot:spot = {
         isShow: false,
-        isBlue: false,
+        isRed: false,
     }
     if(i < 4){
         spot.isShow = true;
     }else if(i > 11){
         spot.isShow = true;
-        spot.isBlue = true;
+        spot.isRed = true;
     }
     spotList.value.push(spot);
 }
@@ -49,6 +49,11 @@ let clickSpot = (bol:boolean,index:number):void|boolean => {
                 return false;
             }
             spotList.value[selectIndex.value].isShow = false;
+            if(spotList.value[selectIndex.value].isRed){
+                spotList.value[index].isRed = true;
+            }else{
+                spotList.value[index].isRed = false;
+            }
             selectIndex.value = null;
             spotList.value[index].isShow = true;
         }
@@ -185,6 +190,9 @@ let clickSpot = (bol:boolean,index:number):void|boolean => {
         border-radius: 20px;
         background: #000;
         visibility: hidden;
+        &.red{
+            background: #F00;
+        }
     }
 }
 </style>
