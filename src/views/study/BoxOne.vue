@@ -11,7 +11,7 @@
             </template>
             <template v-if="true">
                 <!-- 点 -->
-                <div @click="clickSpot(bol.isShow,index)" v-for="bol,index of spotList" :key="index" :class="'spot' + (index+1) + ' ' + (index===selectIndex?'select':'') + ' ' + (bol.isShow?'show':'')" class="spot">
+                <div @click="clickSpot(bol.isShow,index,bol.xindex,bol.yindex)" v-for="bol,index of spotList" :key="index" :class="'spot' + (index+1) + ' ' + (index===selectIndex?'select':'') + ' ' + (bol.isShow?'show':'')" class="spot">
                     <span :class="bol.isRed?'red':''"></span>
                 </div>
             </template>
@@ -48,6 +48,10 @@ class spotobj implements spot{
 }
 // 选中的棋子索引
 let selectIndex = ref<number|null>(null);
+// 选中棋子的x轴索引
+let selectXIndex = ref<number|null>(null);
+// 选中的棋子y轴索引
+let selectYIndex = ref<number|null>(null);
 // 棋子列表
 let spotList = ref<spotobj[]>([]);
 let xindex = 0;
@@ -66,17 +70,24 @@ for(let i = 0,len = 16;i < len;i ++){
 // @params
 // bol:点击的棋子是否显示
 // index:点击的棋子索引
-let clickSpot = (bol:boolean,index:number):void|boolean => {
+// xindex:点击的棋子的x轴索引
+// yindex:点击的棋子的y轴索引
+let clickSpot = (bol:boolean,index:number,xindex:number,yindex:number):void|boolean => {
     if(bol){
         selectIndex.value = index;
+        selectXIndex.value = xindex;
+        selectYIndex.value = yindex;
     }else if(selectIndex.value!==null){
-        if((selectIndex.value===index-4||selectIndex.value===index+4||selectIndex.value===index+1||selectIndex.value===index-1)){
-            if((selectIndex.value+1)%4===0&&index===selectIndex.value+1){
-                return false;
-            }
-            if((index+1)%4===0&&index+1===selectIndex.value){
-                return false;
-            }
+        // 第一种判断棋子移动方法
+        // if((selectIndex.value===index-4||selectIndex.value===index+4||selectIndex.value===index+1||selectIndex.value===index-1)){
+        //     if((selectIndex.value+1)%4===0&&index===selectIndex.value+1){
+        //         return false;
+        //     }
+        //     if((index+1)%4===0&&index+1===selectIndex.value){
+        //         return false;
+        //     }
+        // 第二种判断棋子移动方法
+        if((xindex+1===selectXIndex.value||xindex-1===selectXIndex.value&&yindex===selectYIndex.value)||(yindex+1===selectYIndex.value||yindex-1===selectYIndex.value&&xindex===selectXIndex.value)){
             // 棋子移动并判断红黑棋
             spotList.value[selectIndex.value].isShow = false;
             if(spotList.value[selectIndex.value].isRed){
@@ -85,8 +96,11 @@ let clickSpot = (bol:boolean,index:number):void|boolean => {
                 spotList.value[index].changeColor(false);
             }
             selectIndex.value = null;
+            selectXIndex.value = null;
+            selectYIndex.value = null;
             spotList.value[index].changeShow(true);
         }
+        // }
     }
 }
 </script>
