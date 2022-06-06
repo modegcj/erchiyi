@@ -50,7 +50,7 @@ let clickSpot = (bol:boolean,index:number):void|boolean => {
         selectIndex.value = index;
     }else if(selectIndex.value!==null){
         if((selectIndex.value===index-4||selectIndex.value===index+4||selectIndex.value===index+1||selectIndex.value===index-1)){
-            if((selectIndex.value+1)%4===0&&index===selectIndex.value+1){
+            if((index+1)%4===0&&index+1===selectIndex.value){
                 return false;
             }
             spotList.value[selectIndex.value].isShow = false;
