@@ -21,7 +21,7 @@ interface titleobj{
     name: string;
     path: string;
 }
-const titlearr = ref<titleobj[]>([{name:'第一页',path:'/one'},{name:'第二页',path:'/two'},{name:'第三页',path:'/three'},{name:'第四页',path:'/fore'}]);
+const titlearr = ref<titleobj[]>([{name:'第一页',path:'/one'},{name:'第二页',path:'/two'},{name:'第三页',path:'/three'},{name:'第四页',path:'/four'}]);
 
 </script>
 <style lang="scss">

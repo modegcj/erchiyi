@@ -56,6 +56,7 @@ let clickSpot = (bol:boolean,index:number):void|boolean => {
             if((index+1)%4===0&&index+1===selectIndex.value){
                 return false;
             }
+            // 棋子移动并判断红黑棋
             spotList.value[selectIndex.value].isShow = false;
             if(spotList.value[selectIndex.value].isRed){
                 spotList.value[index].isRed = true;

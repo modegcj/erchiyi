@@ -39,9 +39,9 @@ const routes: Array<RouteRecordRaw> = [
         component:()=>import('@/views/study/BoxThree.vue')
       },
       {
-        path:'/fore',
-        name:'Fore',
-        component:()=>import('@/views/study/BoxFore.vue')
+        path:'/four',
+        name:'Four',
+        component:()=>import('@/views/study/BoxFour.vue')
       }
     ]
   },
