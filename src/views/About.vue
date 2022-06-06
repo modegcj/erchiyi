@@ -12,7 +12,7 @@
 import { Ref } from "@vue/reactivity";
 import { onMounted, ref } from 'vue';
 
-let msg:Ref = ref<string>('This is an about page');
+let msg:Ref<string> = ref<string>('This is an about page');
 class Animal{
   name:string;
   constructor(name:string){

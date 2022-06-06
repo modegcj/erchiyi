@@ -4,7 +4,7 @@
     </div>
 </template>
 <script lang="ts" setup>
-import { onMounted } from "vue";
+import { onMounted,ref } from "vue";
 
 // let a = [1,'1'];
 // a = [];
@@ -14,6 +14,26 @@ let extend = ():number=>{
     return 123;
 }
 
+
+interface int{
+    readonly x:number;
+    y:number;
+}
+let intlist = ref<int[]>([]);
+intlist.value.push({x:123,y:233});
+// intlist.value[0].x = 1;
+console.log(intlist);
+class obj implements int{
+    readonly x:number;
+    y:number;
+    constructor(x:number,y:number){
+        this.x = x;
+        this.y = y;
+    }
+}
+let objlist:Array<obj> = [];
+objlist.push(new obj(1,2));
+console.log(objlist);
 onMounted(()=>{
     class twoObj{
         name?:string;

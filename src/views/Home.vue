@@ -7,10 +7,9 @@
 
 <script lang="ts" setup>
 import { onMounted, ref } from 'vue';
-import type {Ref} from 'vue';
 import HelloWorld from '@/components/HelloWorld.vue'; // @ is an alias to /src
 
-const msg:Ref = ref<string>('Welcome to Your Vue.js + TypeScript App');
+const msg = ref<string>('Welcome to Your Vue.js + TypeScript App');
 enum Color {Red,Green,Blue};
 let c:Color = Color.Red;
 let cName = Color[0];

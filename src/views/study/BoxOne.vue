@@ -20,27 +20,48 @@
 </template>
 <script lang="ts" setup>
 import { ref } from 'vue';
-import type {Ref} from 'vue';
 interface spot{
-    isShow:boolean,
-    isRed:boolean
+    isShow:boolean;
+    isRed:boolean;
+    xindex:number;
+    yindex:number;
+    changeShow(s:boolean):void;
+    changeColor(c:boolean):void;
+}
+class spotobj implements spot{
+    isShow:boolean;  //是否显示
+    isRed:boolean;  //棋子颜色
+    readonly xindex: number;  //x索引
+    readonly yindex: number;  //y索引
+    constructor(isShow: boolean,isRed:boolean,xindex: number,yindex: number){
+        this.isShow = isShow;
+        this.isRed = isRed;
+        this.xindex = xindex;
+        this.yindex = yindex;
+    }
+    changeShow(bol:boolean){
+        this.isShow = bol
+    }
+    changeColor(bol:boolean){
+        this.isRed = bol
+    }
 }
 // 选中的棋子索引
-let selectIndex:Ref = ref<number|null>(null);
+let selectIndex = ref<number|null>(null);
 // 棋子列表
-let spotList:Ref = ref<spot[]>([]);
+let spotList = ref<spotobj[]>([]);
+let xindex = 0;
+let yindex = 0;
 for(let i = 0,len = 16;i < len;i ++){
-    let spot:spot = {
-        isShow: false,
-        isRed: false,
-    }
+    xindex = i%4;
+    yindex = Math.floor(i/4);
     if(i < 4){
-        spot.isShow = true;
+        spotList.value.push(new spotobj(true,false,xindex,yindex));
     }else if(i > 11){
-        spot.isShow = true;
-        spot.isRed = true;
+        spotList.value.push(new spotobj(true,true,xindex,yindex));
+    }else{
+        spotList.value.push(new spotobj(false,false,xindex,yindex));
     }
-    spotList.value.push(spot);
 }
 // @params
 // bol:点击的棋子是否显示
@@ -59,12 +80,12 @@ let clickSpot = (bol:boolean,index:number):void|boolean => {
             // 棋子移动并判断红黑棋
             spotList.value[selectIndex.value].isShow = false;
             if(spotList.value[selectIndex.value].isRed){
-                spotList.value[index].isRed = true;
+                spotList.value[index].changeColor(true);
             }else{
-                spotList.value[index].isRed = false;
+                spotList.value[index].changeColor(false);
             }
             selectIndex.value = null;
-            spotList.value[index].isShow = true;
+            spotList.value[index].changeShow(true);
         }
     }
 }
