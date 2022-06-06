@@ -87,7 +87,7 @@ let clickSpot = (bol:boolean,index:number,xindex:number,yindex:number):void|bool
         //         return false;
         //     }
         // 第二种判断棋子移动方法
-        if((xindex+1===selectXIndex.value||xindex-1===selectXIndex.value&&yindex===selectYIndex.value)||(yindex+1===selectYIndex.value||yindex-1===selectYIndex.value&&xindex===selectXIndex.value)){
+        if(((xindex+1===selectXIndex.value||xindex-1===selectXIndex.value)&&yindex===selectYIndex.value)||((yindex+1===selectYIndex.value||yindex-1===selectYIndex.value)&&xindex===selectXIndex.value)){
             // 棋子移动并判断红黑棋
             spotList.value[selectIndex.value].isShow = false;
             if(spotList.value[selectIndex.value].isRed){
