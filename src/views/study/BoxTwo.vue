@@ -1,20 +1,17 @@
 <template>
     <div class="two">
         <h1>第二页</h1>
+        <canvas id="canvas"></canvas>
     </div>
 </template>
 <script lang="ts" setup>
 import { onMounted,ref } from "vue";
-
 // let a = [1,'1'];
 // a = [];
 // console.log(a);
-
 let extend = ():number=>{
     return 123;
 }
-
-
 interface int{
     readonly x:number;
     y:number;
@@ -53,6 +50,16 @@ onMounted(()=>{
     let output = identity('string');
     // console.log(output);
 })
+
+
+// canvas部分
+
+
 </script>
 <style>
+#canvas{
+    width: 700px;
+    height: 700px;
+    margin: 0 auto;
+}
 </style>
