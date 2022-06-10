@@ -59,9 +59,12 @@ onMounted(()=>{
 
     // canvas部分
     
-    let draw = ():void=>{
-        let canvas:HTMLCanvasElement=<HTMLCanvasElement>document.getElementById("canvas");
-        let ctx:any = canvas.getContext('2d');
+   
+    // draw();
+})
+ // let draw = ():void=>{
+        // let canvas:HTMLCanvasElement=<HTMLCanvasElement>document.getElementById("canvas");
+        // let ctx:any = canvas.getContext('2d');
         // 》》》》》》》》》》  线条、字体相关  《《《《《《《《《《
 
         // ctx.globalAlpha = 0.1;  //透明度(放在前面)
@@ -172,13 +175,34 @@ onMounted(()=>{
 
 
         // 》》》》》》》》》》  移动、旋转、缩放  《《《《《《《《《《
-        
+        // ctx.translate(10,90);  //移动到指定位置
+        // ctx.rotate(Math.PI/180*45);  //旋转角度
+        // ctx.scale(10,30);  //缩放  (x轴缩放系数,y轴缩放系数)
+        // ctx.transform(a,b,c,d,e,f);   //变形矩阵   (水平缩放比例,水平倾斜,垂直倾斜,垂直缩放比例,水平移动,垂直移动)
         // 》》》》》》》》》》  移动、旋转、缩放  ---- end ----  《《《《《《《《《《
 
-    }
-    draw();
-})
+        
 
+        // 》》》》》》》》》》  合成  《《《《《《《《《《
+        // ctx.globalCompositeOperation = "source-over";  //处理重叠部分 值：source-over(默认,新图像会覆盖在原图像上面),source-in(仅显示新图像的重叠部分),source-out(仅显示新图像中没有和老图像重叠的部分)
+                                                          //source-atop(显示老图像和新老图像重叠部分),destination-over(新图像会在老图像下面),destination-in(仅显示老图像的重叠部分),destination-out(仅显示老图像中没有和新图像重叠的部分)
+                                                          //destination-atop(显示新图像和新老图像重叠部分),ighter(重叠部分颜色做加处理),darken(保留重叠部分最黑的像素),lighten(保留重叠部分最亮的色素),xor(重叠部分变透明),copy(只保留新图像)
+        // 》》》》》》》》》》  合成  ---- end ----  《《《《《《《《《《
+
+
+
+        // 》》》》》》》》》》  裁剪路径  《《《《《《《《《《
+        // ctx.clip()  //把已经创建的路径转换成裁剪路径（只能裁剪方法调用之后绘制的图像）
+        // 》》》》》》》》》》  裁剪路径  ---- end ----  《《《《《《《《《《
+
+
+
+        // 》》》》》》》》》》  动画 《《《《《《《《《《
+        // setInterval()  //计时器
+        // setTimeout()  //定时器
+        // requestAnimationFrame()  //浏览器在下次重绘之前调用指定的回调函数
+        // 》》》》》》》》》》  动画  ---- end ----  《《《《《《《《《《
+    // }
 
 </script>
 <style>
