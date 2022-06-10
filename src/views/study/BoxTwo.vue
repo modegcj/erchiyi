@@ -6,6 +6,7 @@
 </template>
 <script lang="ts" setup>
 import { arch } from "os";
+import { text } from "stream/consumers";
 import { onMounted,ref } from "vue";
 // let a = [1,'1'];
 // a = [];
@@ -61,6 +62,7 @@ onMounted(()=>{
     let draw = ():void=>{
         let canvas:HTMLCanvasElement=<HTMLCanvasElement>document.getElementById("canvas");
         let ctx:any = canvas.getContext('2d');
+        // 》》》》》》》》》》线条、字体相关《《《《《《《《《《
         // ctx.globalAlpha = 0.1;  //透明度(放在前面)
         // ctx.fillStyle = "rgb(200,0,0)"; //填充颜色
         // ctx.fillRect(x,y,width,height); //填充矩形 
@@ -71,15 +73,25 @@ onMounted(()=>{
         ctx.moveTo(50,50); //确定画笔起始点
         ctx.lineTo(100,100); //移动
         ctx.lineTo(50,100); //移动
-        ctx.lineWidth = 10; //线条宽度
+        // ctx.lineWidth = 10; //线条宽度
         ctx.lineCap = "round"; //线条末端样式（butt:方形  round:圆形  square:square：线段末端以方形结束，但是增加了一个宽度和线段相同，高度是线段厚度一半的矩形区域。）
         ctx.lineJoin = "round"; //设定两线条接合处的样式（round:圆形  bevel:平  miter:默认）
-        ctx.setLineDash([20,30]); //设置虚线([实线长度，间隙长度])
+        ctx.setLineDash([20,5]); //设置虚线([实线长度，间隙长度])
         ctx.lineDashOffset = 0; //设置虚线起始偏移量
-        // ctx.getLineDash(); //获取当前虚线样式
+        // console.log(ctx.getLineDash()); //获取当前虚线样式
         // ctx.closePath(); //闭合路径(两个点为一条线)
         ctx.stroke();   //描边(不会自动闭合)
         // ctx.fill();  //填充(会自动闭合)
+        // 绘制文本
+        ctx.font = "100px sans-serif"; //设置大小，字体等（与css相同）
+        // ctx.textAline = 'start';  //设置文本对齐选项（start(默认),end,left,right,center）
+        // ctx.textBaseline = 'alphabetic';  //设置基线对齐选项（top,hanging,middle,alphabetic(默认),ideographic,bottom）
+        // ctx.direction = "inherit";  //文本方向(ltr,rtl,inherit(默认))
+        ctx.fillText('这是文本',100,200,200) //绘制填充文本（文本,x,y,最大宽度（可选））
+        ctx.strokeText('这是文本',200,200) //绘制文本边框（文本,x,y,最大宽度（可选））
+        
+        // 》》》》》》》》》》圆弧相关《《《《《《《《《《 
+
         // 绘制圆弧
         // @params ❶
         // startAngle > 开始弧度
@@ -110,6 +122,9 @@ onMounted(()=>{
         // x2,y2:控制点一坐标
         // x3,y3:结束点坐标
         // bezierCurveTo(x1, y1, x2, y2, x3, y3)
+
+
+        // 》》》》》》》》》》绘制图片相关《《《《《《《《《《
 
 
     }
