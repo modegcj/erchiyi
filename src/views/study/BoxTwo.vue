@@ -1,10 +1,11 @@
 <template>
     <div class="two">
         <h1>第二页</h1>
-        <canvas id="canvas"></canvas>
+        <canvas ref="canvas" width="1000" height="500" id="canvas"></canvas>
     </div>
 </template>
 <script lang="ts" setup>
+import { arch } from "os";
 import { onMounted,ref } from "vue";
 // let a = [1,'1'];
 // a = [];
@@ -19,7 +20,10 @@ interface int{
 let intlist = ref<int[]>([]);
 intlist.value.push({x:123,y:233});
 // intlist.value[0].x = 1;
-console.log(intlist);
+// console.log(intlist);
+interface int_1{
+    x:number
+}
 class obj implements int{
     readonly x:number;
     y:number;
@@ -30,7 +34,7 @@ class obj implements int{
 }
 let objlist:Array<obj> = [];
 objlist.push(new obj(1,2));
-console.log(objlist);
+// console.log(objlist);
 onMounted(()=>{
     class twoObj{
         name?:string;
@@ -49,17 +53,74 @@ onMounted(()=>{
     }
     let output = identity('string');
     // console.log(output);
+
+
+
+    // canvas部分
+    
+    let draw = ():void=>{
+        let canvas:HTMLCanvasElement=<HTMLCanvasElement>document.getElementById("canvas");
+        let ctx:any = canvas.getContext('2d');
+        // ctx.globalAlpha = 0.1;  //透明度(放在前面)
+        // ctx.fillStyle = "rgb(200,0,0)"; //填充颜色
+        // ctx.fillRect(x,y,width,height); //填充矩形 
+        // ctx.strokeStyle = "rgb(200,0,0)";  //线条颜色
+        // ctx.strokeRect(5, 5, 60, 60); //绘制线条边框
+        // ctx.clearRect(20,20,30,30); //清除区域
+        ctx.beginPath() //新建一条path
+        ctx.moveTo(50,50); //确定画笔起始点
+        ctx.lineTo(100,100); //移动
+        ctx.lineTo(50,100); //移动
+        ctx.lineWidth = 10; //线条宽度
+        ctx.lineCap = "round"; //线条末端样式（butt:方形  round:圆形  square:square：线段末端以方形结束，但是增加了一个宽度和线段相同，高度是线段厚度一半的矩形区域。）
+        ctx.lineJoin = "round"; //设定两线条接合处的样式（round:圆形  bevel:平  miter:默认）
+        ctx.setLineDash([20,30]); //设置虚线([实线长度，间隙长度])
+        ctx.lineDashOffset = 0; //设置虚线起始偏移量
+        // ctx.getLineDash(); //获取当前虚线样式
+        // ctx.closePath(); //闭合路径(两个点为一条线)
+        ctx.stroke();   //描边(不会自动闭合)
+        // ctx.fill();  //填充(会自动闭合)
+        // 绘制圆弧
+        // @params ❶
+        // startAngle > 开始弧度
+        // endAngle > 结束弧度
+        // anticlockwise > 是否逆时针 > true:逆时针  false:顺时针
+        // arch(x,y,r,startAngle,endAngle,anticlockwise)
+        // radians = (Math.PI/180)*degress 角度转换成弧度  >>>一角度 = π/180 弧度
+        // @params ❷
+        // x1,y1:控制点一坐标
+        // x2,y2:控制点二坐标
+        // radius:圆弧半径
+        // arcTo(x1,y1,x2,y2,radius)
+        // ctx.arcTo(200,50,200,200,100);
+        // ctx.lineTo(200,200);
+        // ctx.stroke();
+        // ctx.beginPath();
+        // ctx.rect(50, 50, 10, 10); //起始点
+        // ctx.rect(200, 50, 10, 10); //控制点一坐标
+        // ctx.rect(200, 200, 10, 10); //控制点二坐标
+        // ctx.fill()
+        // 绘制二次贝塞尔曲线
+        // @params
+        // x1,y1:控制点一坐标
+        // x2,y2:结束点坐标
+        // quadraticCurveTo(x1, y1, x2, y2)
+        // 绘制三次贝塞尔曲线
+        // x1,y1:控制点一坐标
+        // x2,y2:控制点一坐标
+        // x3,y3:结束点坐标
+        // bezierCurveTo(x1, y1, x2, y2, x3, y3)
+
+
+    }
+    draw();
 })
-
-
-// canvas部分
 
 
 </script>
 <style>
 #canvas{
-    width: 700px;
-    height: 700px;
     margin: 0 auto;
+    background: #e2e2e2;
 }
 </style>
