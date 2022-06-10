@@ -53,8 +53,40 @@ onMounted(()=>{
         return arg;
     }
     let output = identity('string');
+    let canvas:HTMLCanvasElement=<HTMLCanvasElement>document.getElementById('canvas');
+    let ctx:any = canvas.getContext('2d');
     // console.log(output);
+    // 绘制画布
+    let draw = ():void => {
+        ctx.clearRect(0,0,1000,500);
+        let x1:number = parseInt((Math.random()*(1000-100)+100).toString());
+        let y1:number = parseInt((Math.random()*(500-50)+50).toString());
+        let color1:string = randomColor();
+        ctx.fillStyle = color1;
+        let r = 0;
+        let timer:any = setInterval(():void=>{
+            r += 1;
+            if(r === 40){
+                clearInterval(timer);
+                requestAnimationFrame(draw);
+            }else{
+                ctx.beginPath();
+                ctx.arc(x1,y1,r,0,360,false);
+                ctx.fill();
+                ctx.closePath();
+            }
+        },1000/60);
+        
+        
+    }
+    draw();
 
+    // 随机颜色
+    function randomColor():string{
+        let col = "#";
+        for (var i = 0; i < 6; i++) col+=parseInt((Math.random() * 16).toString()).toString(16);
+        return col;
+    }
 
 
     // canvas部分
@@ -209,5 +241,6 @@ onMounted(()=>{
 #canvas{
     margin: 0 auto;
     background: #e2e2e2;
+    cursor: pointer;
 }
 </style>
