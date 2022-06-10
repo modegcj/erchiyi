@@ -62,35 +62,40 @@ onMounted(()=>{
     let draw = ():void=>{
         let canvas:HTMLCanvasElement=<HTMLCanvasElement>document.getElementById("canvas");
         let ctx:any = canvas.getContext('2d');
-        // 》》》》》》》》》》线条、字体相关《《《《《《《《《《
+        // 》》》》》》》》》》  线条、字体相关  《《《《《《《《《《
+
         // ctx.globalAlpha = 0.1;  //透明度(放在前面)
         // ctx.fillStyle = "rgb(200,0,0)"; //填充颜色
         // ctx.fillRect(x,y,width,height); //填充矩形 
         // ctx.strokeStyle = "rgb(200,0,0)";  //线条颜色
         // ctx.strokeRect(5, 5, 60, 60); //绘制线条边框
         // ctx.clearRect(20,20,30,30); //清除区域
-        ctx.beginPath() //新建一条path
-        ctx.moveTo(50,50); //确定画笔起始点
-        ctx.lineTo(100,100); //移动
-        ctx.lineTo(50,100); //移动
+        // ctx.beginPath() //新建一条path
+        // ctx.moveTo(50,50); //确定画笔起始点
+        // ctx.lineTo(100,100); //移动
+        // ctx.lineTo(50,100); //移动
         // ctx.lineWidth = 10; //线条宽度
-        ctx.lineCap = "round"; //线条末端样式（butt:方形  round:圆形  square:square：线段末端以方形结束，但是增加了一个宽度和线段相同，高度是线段厚度一半的矩形区域。）
-        ctx.lineJoin = "round"; //设定两线条接合处的样式（round:圆形  bevel:平  miter:默认）
-        ctx.setLineDash([20,5]); //设置虚线([实线长度，间隙长度])
-        ctx.lineDashOffset = 0; //设置虚线起始偏移量
+        // ctx.lineCap = "round"; //线条末端样式（butt:方形  round:圆形  square:square：线段末端以方形结束，但是增加了一个宽度和线段相同，高度是线段厚度一半的矩形区域。）
+        // ctx.lineJoin = "round"; //设定两线条接合处的样式（round:圆形  bevel:平  miter:默认）
+        // ctx.setLineDash([20,5]); //设置虚线([实线长度，间隙长度])
+        // ctx.lineDashOffset = 0; //设置虚线起始偏移量
         // console.log(ctx.getLineDash()); //获取当前虚线样式
         // ctx.closePath(); //闭合路径(两个点为一条线)
-        ctx.stroke();   //描边(不会自动闭合)
+        // ctx.stroke();   //描边(不会自动闭合)
         // ctx.fill();  //填充(会自动闭合)
         // 绘制文本
-        ctx.font = "100px sans-serif"; //设置大小，字体等（与css相同）
+        // ctx.font = "100px sans-serif"; //设置大小，字体等（与css相同）
         // ctx.textAline = 'start';  //设置文本对齐选项（start(默认),end,left,right,center）
         // ctx.textBaseline = 'alphabetic';  //设置基线对齐选项（top,hanging,middle,alphabetic(默认),ideographic,bottom）
         // ctx.direction = "inherit";  //文本方向(ltr,rtl,inherit(默认))
-        ctx.fillText('这是文本',100,200,200) //绘制填充文本（文本,x,y,最大宽度（可选））
-        ctx.strokeText('这是文本',200,200) //绘制文本边框（文本,x,y,最大宽度（可选））
+        // ctx.fillText('这是文本',100,200,200) //绘制填充文本（文本,x,y,最大宽度（可选））
+        // ctx.strokeText('这是文本',200,200) //绘制文本边框（文本,x,y,最大宽度（可选））
+
+        // 》》》》》》》》》》  线条、字体相关 ---- end ----  《《《《《《《《《《
+
+
         
-        // 》》》》》》》》》》圆弧相关《《《《《《《《《《 
+        // 》》》》》》》》》》  圆弧相关  《《《《《《《《《《 
 
         // 绘制圆弧
         // @params ❶
@@ -123,9 +128,52 @@ onMounted(()=>{
         // x3,y3:结束点坐标
         // bezierCurveTo(x1, y1, x2, y2, x3, y3)
 
+        // 》》》》》》》》》》  圆弧相关  ---- end ----  《《《《《《《《《《 
 
-        // 》》》》》》》》》》绘制图片相关《《《《《《《《《《
 
+
+        // 》》》》》》》》》》  绘制图片相关  《《《《《《《《《《
+
+        // 方法一
+        // let img:any = document.getElementById('');//获取页面图片
+        // 方法二
+        // let img = new Image(); //创建一个图片
+        // img.onload = function(){
+            // ctx.drawImage(img,0,0,180,100); //开始绘制图片(五个参数) 参数：（图片,x,y,width(可选),height(可选)）
+            // ctx.drawImage(img,100,0,500,300,200,0,180,100); //切片(九个参数)  参数：(图片,切片x位置,切片y位置,切片宽度,切片高度,切片显示x,切片显示y,切片显示宽度,切片显示高度)
+        // }
+        // img.src = require("@/assets/nvwushen.jpeg");  //设置图片地址
+
+        // 》》》》》》》》》》  绘制图片相关  ---- end ----  《《《《《《《《《《
+
+
+
+        // 》》》》》》》》》》  状态的保存和恢复部分  《《《《《《《《《《
+        // ctx.save(); //保存canvas状态（类似数组）
+        // ctx.restore(); //加载之前存储的状态
+        // ctx.fillRect(0, 0, 150, 150);   // 使用默认设置绘制一个矩形
+        // ctx.save();                  // 保存默认状态
+    
+        // ctx.fillStyle = 'red'       // 在原有配置基础上对颜色做改变
+        // ctx.fillRect(15, 15, 120, 120); // 使用新的设置绘制一个矩形
+    
+        // ctx.save();                  // 保存当前状态
+        // ctx.fillStyle = '#FFF'       // 再次改变颜色配置
+        // ctx.fillRect(30, 30, 90, 90);   // 使用新的配置绘制一个矩形
+    
+        // ctx.restore();               // 重新加载之前的颜色状态
+        // ctx.fillRect(45, 45, 60, 60);   // 使用上一次的配置绘制一个矩形
+    
+        // ctx.restore();               // 加载默认颜色配置
+        // ctx.fillRect(60, 60, 30, 30);   // 使用加载的配置绘制一个矩形
+
+        // 》》》》》》》》》》  状态的保存和恢复部分  ---- end ----  《《《《《《《《《《
+
+
+
+        // 》》》》》》》》》》  移动、旋转、缩放  《《《《《《《《《《
+        
+        // 》》》》》》》》》》  移动、旋转、缩放  ---- end ----  《《《《《《《《《《
 
     }
     draw();
