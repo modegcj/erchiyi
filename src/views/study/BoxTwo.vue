@@ -137,7 +137,7 @@ onMounted(()=>{
         // startAngle > 开始弧度
         // endAngle > 结束弧度
         // anticlockwise > 是否逆时针 > true:逆时针  false:顺时针
-        // arch(x,y,r,startAngle,endAngle,anticlockwise)
+        // arc(x,y,r,startAngle,endAngle,anticlockwise)
         // radians = (Math.PI/180)*degress 角度转换成弧度  >>>一角度 = π/180 弧度
         // @params ❷
         // x1,y1:控制点一坐标
