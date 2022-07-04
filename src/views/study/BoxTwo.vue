@@ -118,6 +118,7 @@ onMounted(()=>{
         // ctx.closePath(); //闭合路径(两个点为一条线)
         // ctx.stroke();   //描边(不会自动闭合)
         // ctx.fill();  //填充(会自动闭合)
+        // isPointInPath()指定的点是否位于路径中
         // 绘制文本
         // ctx.font = "100px sans-serif"; //设置大小，字体等（与css相同）
         // ctx.textAline = 'start';  //设置文本对齐选项（start(默认),end,left,right,center）
