@@ -112,6 +112,7 @@ onMounted(()=>{
         // ctx.lineWidth = 10; //线条宽度
         // ctx.lineCap = "round"; //线条末端样式（butt:方形  round:圆形  square:square：线段末端以方形结束，但是增加了一个宽度和线段相同，高度是线段厚度一半的矩形区域。）
         // ctx.lineJoin = "round"; //设定两线条接合处的样式（round:圆形  bevel:平  miter:默认）
+        // ctx.miterLimit = 10; //设定或返回最大衔接长度
         // ctx.setLineDash([20,5]); //设置虚线([实线长度，间隙长度])
         // ctx.lineDashOffset = 0; //设置虚线起始偏移量
         // console.log(ctx.getLineDash()); //获取当前虚线样式
