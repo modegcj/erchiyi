@@ -5,8 +5,6 @@
     </div>
 </template>
 <script lang="ts" setup>
-import { arch } from "os";
-import { text } from "stream/consumers";
 import { onMounted,ref } from "vue";
 // let a = [1,'1'];
 // a = [];
